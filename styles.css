@@ -1,0 +1,83 @@
+*{box-sizing:border-box;font-family:Segoe UI, Roboto, "Microsoft Yahei", sans-serif}
+:root{
+  --bg:#0f172a;--panel:#111827;--accent:#06b6d4;--muted:#94a3b8;
+}
+body{margin:0;background:linear-gradient(135deg,#0b1220,#10243a);color:#e6eef8}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
+h1{margin:0;font-size:20px;color:var(--accent)}
+#controls{display:flex;gap:10px;align-items:center;margin-top:10px}
+
+/* bottom control bar */
+#bottomControls{position:fixed;left:0;right:0;bottom:14px;display:flex;justify-content:center;pointer-events:auto}
+#bottomControls .centerBar{width:960px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:10px 16px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 24px rgba(2,6,23,0.5)}
+#bottomControls .leftInfo{color:var(--muted);font-size:13px;display:flex;flex-direction:column;gap:4px}
+#bottomControls .controlsLarge{display:flex;gap:12px;align-items:center}
+.large{padding:14px 20px;border-radius:12px;font-size:16px}
+
+/* dice enhancements: pop-out + rotation */
+.dice{width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#fff,#f3f4f6);color:#0b1220;display:flex;align-items:center;justify-content:center;font-weight:800;border:2px solid rgba(0,0,0,0.08);box-shadow:0 6px 18px rgba(2,6,23,0.45);cursor:default;transform:scale(1);transition:transform 180ms ease}
+.dice.pop{
+  transform:scale(1.15) translateY(-6px);
+}
+.dice.spin{
+  animation: dice-spin 700ms cubic-bezier(.22,.9,.32,1);
+}
+@keyframes dice-spin{
+  0%{transform:rotate(0) scale(1)}
+  40%{transform:rotate(540deg) scale(1.18)}
+  100%{transform:rotate(720deg) scale(1)}
+}
+button{background:linear-gradient(180deg,#16a34a,#059669);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+main{display:flex;gap:16px;padding:12px}
+#boardArea{flex:1;display:flex;justify-content:center;align-items:center}
+#board{width:760px;height:760px;background:linear-gradient(90deg,#f9fafb,#f1f5f9);border-radius:16px;padding:18px;position:relative;box-shadow:0 8px 30px rgba(2,6,23,.6);overflow:hidden}
+.board-grid{position:relative;width:100%;height:100%}
+.board-cell{position:absolute;display:flex;justify-content:center;align-items:center}
+.cell{display:flex;flex-direction:column;justify-content:center;align-items:center;border:2px solid #e6eef8}
+.cell .cell-name{font-weight:700;color:#0f172a}
+.cell .cell-info{font-size:12px;color:var(--muted)}
+
+/* types */
+.cell.prop{background:linear-gradient(180deg,#fff7ed,#fff1e6);border-color:#f59e0b}
+.cell.event{background:linear-gradient(180deg,#eef2ff,#eef6ff);border-color:#6366f1}
+.cell.stock{background:linear-gradient(180deg,#ecfeff,#f0f9ff);border-color:#06b6d4}
+.cell.empty{background:linear-gradient(180deg,#f7f7fb,#f3f3f8);border-color:#e6eef8}
+.cell-name{font-weight:700;color:#0f172a}
+.cell-info{font-size:12px;color:var(--muted)}
+/* layout: 8x8 outer track */
+.board-grid{position:relative;width:100%;height:100%}
+.board-cell{position:absolute;display:flex;justify-content:center;align-items:center}
+.player-token{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;border:2px solid rgba(255,255,255,0.25)}
+.token-0{background:#ef4444}
+.token-1{background:#3b82f6}
+.token-2{background:#a78bfa}
+.token-3{background:#f59e0b}
+#sidePanel{width:320px;background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.players .player{padding:8px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent);display:flex;justify-content:space-between;align-items:center}
+.market{padding:8px;border-radius:8px;background:linear-gradient(90deg,#0ea5a48a,#06b6d44d)}
+.stockRow{display:flex;align-items:center;justify-content:space-between;padding:4px 0}
+.spark{width:80px;height:28px}
+.assets{padding:8px;border-radius:8px;background:linear-gradient(90deg,#7c3aed33,#06b6d422);margin-top:8px}
+.assets h4{margin:6px 0}
+.log{height:160px;overflow:auto;background:rgba(0,0,0,0.2);padding:8px;border-radius:8px}
+.modal .card{max-width:560px}
+.log p{margin:6px 0;font-size:13px}
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6)}
+.modal .card{background:white;color:#0b1220;padding:16px;border-radius:12px;width:420px}
+.small{font-size:12px;color:var(--muted)}
+footer{padding:8px;text-align:center;color:var(--muted)}
+@media (max-width:1000px){#board{width:520px;height:520px}#sidePanel{width:260px}}
+
+/* dice styling and animation */
+.dice{width:38px;height:38px;border-radius:6px;background:linear-gradient(180deg,#fff,#f3f4f6);color:#0b1220;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid rgba(0,0,0,0.1);box-shadow:0 3px 8px rgba(2,6,23,0.4);cursor:default}
+.dice.roll{
+  animation: dice-roll 700ms ease-in-out;
+}
+@keyframes dice-roll{
+  0%{transform:rotate(0) translateY(0)}
+  20%{transform:rotate(30deg) translateY(-6px)}
+  40%{transform:rotate(-25deg) translateY(4px)}
+  60%{transform:rotate(20deg) translateY(-4px)}
+  100%{transform:rotate(0) translateY(0)}
+}

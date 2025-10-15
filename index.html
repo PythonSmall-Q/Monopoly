@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>商赛大富翁原型</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>商人之路 — 大富翁原型</h1>
+      <div id="controls">
+        <label for="playerCount" class="small">玩家人数:</label>
+        <select id="playerCount">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+        </select>
+        <label for="roundMins" class="small">局时(分钟):</label>
+        <select id="roundMins">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40" selected>40</option>
+        </select>
+        <label class="small"><input type="checkbox" id="aiEnabled"> 启用 AI 玩家</label>
+        <label for="aiCount" class="small">AI 数量:</label>
+        <select id="aiCount">
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+    </header>
+
+    <main>
+      <section id="boardArea">
+        <div id="board"></div>
+      </section>
+
+      <aside id="sidePanel">
+        <div class="players" id="playersPanel"></div>
+        <div class="market" id="marketPanel"></div>
+        <div class="assets" id="assetsPanel"></div>
+        <div class="transactions" id="transactionsPanel">
+          <div style="display:flex;justify-content:space-between;align-items:center"><h4>交易记录</h4><div><button id="exportTx">导出</button> <button id="replayTx">重播</button></div></div>
+          <div id="txList" class="log"></div>
+        </div>
+        <div class="log" id="log"></div>
+      </aside>
+    </main>
+  </div>
+
+  <div id="bottomControls">
+    <div class="centerBar">
+      <div class="leftInfo">
+        <div id="timer">剩余时间: <span id="timeLeft">40:00</span></div>
+        <div id="turnTimer">本回合剩余: <span id="turnLeft">--</span></div>
+      </div>
+      <div class="controlsLarge">
+        <button id="startBtn" class="large">开始游戏</button>
+        <div id="dice" class="dice" title="骰子">-</div>
+        <button id="rollBtn" class="large" disabled>掷骰子</button>
+        <button id="helpBtn" class="large" title="帮助">?</button>
+      </div>
+    </div>
+  </div>
+
+  <template id="cellTpl">
+    <div class="cell">
+      <div class="cell-name"></div>
+      <div class="cell-info"></div>
+    </div>
+  </template>
+  <!-- modal container for confirmations and trading -->
+  <div id="modalRoot" style="display:none"></div>
+  <div id="tooltipRoot" style="position:fixed;pointer-events:none;display:none;background:rgba(0,0,0,0.75);color:white;padding:6px;border-radius:6px;font-size:12px;z-index:9999"></div>
+
+  <script src="game.js"></script>
+</body>
+</html>
